@@ -53,6 +53,7 @@
       font-weight: bold;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
   <div class="overlay">
@@ -146,6 +147,32 @@
       popup.style.display = 'flex'; // Show the popup
     }
   }
+        <script>
+  function checkAllBoxes() {
+    const checkboxes = document.querySelectorAll('.animal-check');
+    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+    const popup = document.getElementById('completion-popup');
+
+    if (allChecked) {
+      popup.style.display = 'flex';
+      
+      // Launch confetti 🎉
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    }
+  }
+
+  document.querySelectorAll('.animal-check').forEach(cb => {
+    cb.addEventListener('change', checkAllBoxes);
+  });
+
+  document.getElementById('completion-popup').addEventListener('click', () => {
+    document.getElementById('completion-popup').style.display = 'none';
+  });
+</script>
 
   document.querySelectorAll('.animal-check').forEach(cb => {
     cb.addEventListener('change', checkAllBoxes);
