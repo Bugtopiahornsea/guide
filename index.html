@@ -45,6 +45,7 @@
       height: 140px;
       object-fit: cover;
       border-radius: 6px;
+      cursor: pointer;
     }
 
     .animal label {
@@ -53,7 +54,8 @@
       font-weight: bold;
     }
 
-    #completion-popup {
+    #completion-popup,
+    #info-popup {
       display: none;
       position: fixed;
       top: 0; left: 0;
@@ -67,7 +69,8 @@
       cursor: pointer;
     }
 
-    #completion-popup img {
+    #completion-popup img,
+    #info-popup img {
       max-width: 90%;
       max-height: 90%;
     }
@@ -83,17 +86,55 @@
     </p>
     
     <div class="animal-list">
-      <!-- Animal Entries -->
-      <div class="animal"><img src="https://i.imgur.com/5Fxx9zi.jpg" alt="Blue Morpho"><label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label></div>
-      <div class="animal"><img src="https://i.imgur.com/CwauHS4.jpg" alt="Green Iguana - Emerald"><label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Emerald"> Green Iguana - Emerald</label></div>
-      <div class="animal"><img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant"><label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label></div>
-      <div class="animal"><img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect"><label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label></div>
-      <div class="animal"><img src="https://i.imgur.com/UdYLG0y.jpg" alt="Green Iguana - Inferno"><label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Inferno"> Green Iguana - Inferno</label></div>
-      <div class="animal"><img src="https://i.imgur.com/LNA9gu3.jpg" alt="Blue and Gold Macaw - Jackie"><label><input type="checkbox" class="animal-check" data-animal="Blue and Gold Macaw - Jackie"> Blue and Gold Macaw - Jackie</label></div>
-      <div class="animal"><img src="https://i.imgur.com/yJMuVfB.jpg" alt="Green Winged Macaw - Nelly"><label><input type="checkbox" class="animal-check" data-animal="Green Winged Macaw - Nelly"> Green Winged Macaw - Nelly</label></div>
-      <div class="animal"><img src="https://i.imgur.com/ZF433w3.jpg" alt="Owl Butterfly"><label><input type="checkbox" class="animal-check" data-animal="Owl Butterfly"> Owl Butterfly</label></div>
-      <div class="animal"><img src="https://i.imgur.com/EhNrm8B.jpg" alt="Chinese Soft Shell Turtle"><label><input type="checkbox" class="animal-check" data-animal="Chinese Soft Shell Turtle"> Chinese Soft Shell Turtle</label></div>
-      <div class="animal"><img src="https://i.imgur.com/v7vo7IV.jpg" alt="Red Footed Tortoise"><label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise"> Red Footed Tortoise</label></div>
+      <div class="animal">
+        <img src="https://i.imgur.com/5Fxx9zi.jpg" alt="Blue Morpho" data-info="https://imgur.com/lrlHRAf.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/CwauHS4.jpg" alt="Green Iguana - Emerald" data-info="https://imgur.com/YcGWLaI.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Emerald"> Green Iguana - Emerald</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant" data-info="https://imgur.com/C2TRmET.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/UdYLG0y.jpg" alt="Green Iguana - Inferno" data-info="https://imgur.com/YcGWLaI.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Inferno"> Green Iguana - Inferno</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/LNA9gu3.jpg" alt="Blue and Gold Macaw - Jackie" data-info="https://imgur.com/zQ7szKg.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Blue and Gold Macaw - Jackie"> Blue and Gold Macaw - Jackie</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/yJMuVfB.jpg" alt="Green Winged Macaw - Nelly" data-info="https://imgur.com/YZQmmWc.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Green Winged Macaw - Nelly"> Green Winged Macaw - Nelly</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/ZF433w3.jpg" alt="Owl Butterfly" data-info="https://imgur.com/gSrC7Ut.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Owl Butterfly"> Owl Butterfly</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/EhNrm8B.jpg" alt="Chinese Soft Shell Turtle" data-info="https://imgur.com/93q0Xnj.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Chinese Soft Shell Turtle"> Chinese Soft Shell Turtle</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/v7vo7IV.jpg" alt="Red Footed Tortoise" data-info="https://imgur.com/Xvz1aW2.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise"> Red Footed Tortoise</label>
+      </div>
     </div>
 
     <p style="text-align: center; font-size: 2em; margin-top: 40px; font-weight: bold; color: darkgreen;">
@@ -107,13 +148,18 @@
     </div>
   </div>
 
-  <!-- Popup for completion -->
+  <!-- Completion Popup -->
   <div id="completion-popup">
     <img src="https://i.imgur.com/X08eo9y.png" alt="You found them all!">
   </div>
 
+  <!-- Info Popup -->
+  <div id="info-popup">
+    <img id="info-image" src="" alt="Animal Info">
+  </div>
+
   <script>
-    // Show popup + confetti if all checkboxes are checked
+    // Completion Logic
     function checkAllBoxes() {
       const checkboxes = document.querySelectorAll('.animal-check');
       const allChecked = Array.from(checkboxes).every(cb => cb.checked);
@@ -125,20 +171,7 @@
       }
     }
 
-    // Add listener to each checkbox
-    document.querySelectorAll('.animal-check').forEach(cb => {
-      cb.addEventListener('change', () => {
-        checkAllBoxes();
-        saveCheckboxState();
-      });
-    });
-
-    // Hide popup on click
-    document.getElementById('completion-popup').addEventListener('click', () => {
-      document.getElementById('completion-popup').style.display = 'none';
-    });
-
-    // Save state
+    // Save checkbox state
     function saveCheckboxState() {
       const seen = [];
       document.querySelectorAll('.animal-check').forEach(cb => {
@@ -147,12 +180,40 @@
       localStorage.setItem('seenAnimals', JSON.stringify(seen));
     }
 
-    // Load state
+    // Load checkbox state
     window.addEventListener('load', () => {
       const seen = JSON.parse(localStorage.getItem('seenAnimals') || '[]');
       document.querySelectorAll('.animal-check').forEach(cb => {
         if (seen.includes(cb.dataset.animal)) cb.checked = true;
       });
+    });
+
+    // Attach events to checkboxes
+    document.querySelectorAll('.animal-check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        checkAllBoxes();
+        saveCheckboxState();
+      });
+    });
+
+    // Completion popup close
+    document.getElementById('completion-popup').addEventListener('click', () => {
+      document.getElementById('completion-popup').style.display = 'none';
+    });
+
+    // Info popup logic
+    document.querySelectorAll('.animal img').forEach(img => {
+      img.addEventListener('click', () => {
+        const infoSrc = img.getAttribute('data-info');
+        const infoPopup = document.getElementById('info-popup');
+        const infoImage = document.getElementById('info-image');
+        infoImage.src = infoSrc;
+        infoPopup.style.display = 'flex';
+      });
+    });
+
+    document.getElementById('info-popup').addEventListener('click', () => {
+      document.getElementById('info-popup').style.display = 'none';
     });
   </script>
 </body>
