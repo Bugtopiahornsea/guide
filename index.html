@@ -119,27 +119,44 @@
   <a href="https://www.bugtopia.co.uk" target="_blank">
     <img src="https://i.imgur.com/tj0wqGL.png" alt="Bugtopia Logo" style="max-width: 150px;">
   </a>
+      <div id="completion-popup" style="
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+">
+  <img src="https://i.imgur.com/X08eo9y.png" alt="You found them all!" style="max-width: 90%; max-height: 90%;">
 
-      <div id="completion-message" style="display: none; text-align: center; margin-top: 30px;">
-  <img src="https://imgur.com/X08eo9y" alt="Congratulations!" style="max-width: 200px;">
-  <p style="font-size: 1.5em; color: green; font-weight: bold;">You found them all!</p>
   </div>
 
       <script>
   function checkAllBoxes() {
     const checkboxes = document.querySelectorAll('.animal-check');
     const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-    const message = document.getElementById('completion-message');
+    const popup = document.getElementById('completion-popup');
+
     if (allChecked) {
-      message.style.display = 'block';
+      popup.style.display = 'flex'; // Show the popup
     }
   }
 
   document.querySelectorAll('.animal-check').forEach(cb => {
     cb.addEventListener('change', checkAllBoxes);
   });
-</script>
 
+  // Hide the popup when clicked
+  document.getElementById('completion-popup').addEventListener('click', () => {
+    document.getElementById('completion-popup').style.display = 'none';
+  });
+</script>
+ 
   <script>
     // Save checkbox state
     document.querySelectorAll('.animal-check').forEach(checkbox => {
