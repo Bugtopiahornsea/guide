@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Bugtopia Hornse Zoo - Free Roaming Animals</title>
+  <title>Bugtopia Hornsea Zoo - Free Roaming Animals</title>
   <style>
     body {
       margin: 0;
@@ -52,142 +52,102 @@
       margin-top: 8px;
       font-weight: bold;
     }
+
+    #completion-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    #completion-popup img {
+      max-width: 90%;
+      max-height: 90%;
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
   <div class="overlay">
-    <h1>Bugtopia Hornse Zoo - Free Roaming Animals</h1>
+    <h1>Bugtopia Hornsea Zoo - Free Roaming Animals</h1>
     
     <p style="text-align: center; font-size: 1.2em; margin-bottom: 20px;">
-  ✅ Tick the boxes when you find the animal!
-</p>
+      ✅ Tick the boxes when you find the animal!
+    </p>
     
     <div class="animal-list">
-      <div class="animal">
-        <img src="https://i.imgur.com/5Fxx9zi.jpg" alt="Blue Morpho">
-        <label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/CwauHS4.jpg" alt="Green Iguana - Emerald">
-        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Emerald"> Green Iguana - Emerald</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant">
-        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect">
-        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/UdYLG0y.jpg" alt="Green Iguana - Inferno">
-        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Inferno"> Green Iguana - Inferno</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/LNA9gu3.jpg" alt="Blue and Gold Macaw - Jackie">
-        <label><input type="checkbox" class="animal-check" data-animal="Blue and Gold Macaw - Jackie"> Blue and Gold Macaw - Jackie</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/yJMuVfB.jpg" alt="Green Winged Macaw - Nelly">
-        <label><input type="checkbox" class="animal-check" data-animal="Green Winged Macaw - Nelly"> Green Winged Macaw - Nelly</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/ZF433w3.jpg" alt="Owl Butterfly">
-        <label><input type="checkbox" class="animal-check" data-animal="Owl Butterfly"> Owl Butterfly</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/EhNrm8B.jpg" alt="Chinese Soft Shell Turtle">
-        <label><input type="checkbox" class="animal-check" data-animal="Chinese Soft Shell Turtle"> Chinese Soft Shell Turtle</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/v7vo7IV.jpg" alt="Red Footed Tortoise">
-        <label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise"> Red Footed Tortoise</label>
-      </div>
+      <!-- Animal Entries -->
+      <div class="animal"><img src="https://i.imgur.com/5Fxx9zi.jpg" alt="Blue Morpho"><label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label></div>
+      <div class="animal"><img src="https://i.imgur.com/CwauHS4.jpg" alt="Green Iguana - Emerald"><label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Emerald"> Green Iguana - Emerald</label></div>
+      <div class="animal"><img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant"><label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label></div>
+      <div class="animal"><img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect"><label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label></div>
+      <div class="animal"><img src="https://i.imgur.com/UdYLG0y.jpg" alt="Green Iguana - Inferno"><label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Inferno"> Green Iguana - Inferno</label></div>
+      <div class="animal"><img src="https://i.imgur.com/LNA9gu3.jpg" alt="Blue and Gold Macaw - Jackie"><label><input type="checkbox" class="animal-check" data-animal="Blue and Gold Macaw - Jackie"> Blue and Gold Macaw - Jackie</label></div>
+      <div class="animal"><img src="https://i.imgur.com/yJMuVfB.jpg" alt="Green Winged Macaw - Nelly"><label><input type="checkbox" class="animal-check" data-animal="Green Winged Macaw - Nelly"> Green Winged Macaw - Nelly</label></div>
+      <div class="animal"><img src="https://i.imgur.com/ZF433w3.jpg" alt="Owl Butterfly"><label><input type="checkbox" class="animal-check" data-animal="Owl Butterfly"> Owl Butterfly</label></div>
+      <div class="animal"><img src="https://i.imgur.com/EhNrm8B.jpg" alt="Chinese Soft Shell Turtle"><label><input type="checkbox" class="animal-check" data-animal="Chinese Soft Shell Turtle"> Chinese Soft Shell Turtle</label></div>
+      <div class="animal"><img src="https://i.imgur.com/v7vo7IV.jpg" alt="Red Footed Tortoise"><label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise"> Red Footed Tortoise</label></div>
     </div>
-  <p style="text-align: center; font-size: 2em; margin-top: 40px; font-weight: bold; color: darkgreen;">Can you find them all?</p>     
+
+    <p style="text-align: center; font-size: 2em; margin-top: 40px; font-weight: bold; color: darkgreen;">
+      Can you find them all?
+    </p>
 
     <div style="text-align: center; margin-top: 20px;">
-  <a href="https://www.bugtopia.co.uk" target="_blank">
-    <img src="https://i.imgur.com/tj0wqGL.png" alt="Bugtopia Logo" style="max-width: 150px;">
-  </a>
-      <div id="completion-popup" style="
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-">
-  <img src="https://i.imgur.com/X08eo9y.png" alt="You found them all!" style="max-width: 90%; max-height: 90%;">
-
+      <a href="https://www.bugtopia.co.uk" target="_blank">
+        <img src="https://i.imgur.com/tj0wqGL.png" alt="Bugtopia Logo" style="max-width: 150px;">
+      </a>
+    </div>
   </div>
 
-      <script>
-  function checkAllBoxes() {
-    const checkboxes = document.querySelectorAll('.animal-check');
-    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-    const popup = document.getElementById('completion-popup');
+  <!-- Popup for completion -->
+  <div id="completion-popup">
+    <img src="https://i.imgur.com/X08eo9y.png" alt="You found them all!">
+  </div>
 
-    if (allChecked) {
-      popup.style.display = 'flex'; // Show the popup
-    }
-  }
-        <script>
-  function checkAllBoxes() {
-    const checkboxes = document.querySelectorAll('.animal-check');
-    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-    const popup = document.getElementById('completion-popup');
-
-    if (allChecked) {
-      popup.style.display = 'flex';
-    
-  document.querySelectorAll('.animal-check').forEach(cb => {
-    cb.addEventListener('change', checkAllBoxes);
-  });
-
-  document.getElementById('completion-popup').addEventListener('click', () => {
-    document.getElementById('completion-popup').style.display = 'none';
-  });
-</script>
-
-  document.querySelectorAll('.animal-check').forEach(cb => {
-    cb.addEventListener('change', checkAllBoxes);
-  });
-
-  // Hide the popup when clicked
-  document.getElementById('completion-popup').addEventListener('click', () => {
-    document.getElementById('completion-popup').style.display = 'none';
-  });
-</script>
- 
   <script>
-    // Save checkbox state
-    document.querySelectorAll('.animal-check').forEach(checkbox => {
-      checkbox.addEventListener('change', () => {
-        const seen = [];
-        document.querySelectorAll('.animal-check').forEach(cb => {
-          if (cb.checked) seen.push(cb.dataset.animal);
-        });
-        localStorage.setItem('seenAnimals', JSON.stringify(seen));
+    // Show popup + confetti if all checkboxes are checked
+    function checkAllBoxes() {
+      const checkboxes = document.querySelectorAll('.animal-check');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      const popup = document.getElementById('completion-popup');
+
+      if (allChecked && popup.style.display !== 'flex') {
+        popup.style.display = 'flex';
+        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+      }
+    }
+
+    // Add listener to each checkbox
+    document.querySelectorAll('.animal-check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        checkAllBoxes();
+        saveCheckboxState();
       });
     });
 
-    // Load checkbox state on page load
+    // Hide popup on click
+    document.getElementById('completion-popup').addEventListener('click', () => {
+      document.getElementById('completion-popup').style.display = 'none';
+    });
+
+    // Save state
+    function saveCheckboxState() {
+      const seen = [];
+      document.querySelectorAll('.animal-check').forEach(cb => {
+        if (cb.checked) seen.push(cb.dataset.animal);
+      });
+      localStorage.setItem('seenAnimals', JSON.stringify(seen));
+    }
+
+    // Load state
     window.addEventListener('load', () => {
       const seen = JSON.parse(localStorage.getItem('seenAnimals') || '[]');
       document.querySelectorAll('.animal-check').forEach(cb => {
