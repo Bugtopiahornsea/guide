@@ -34,17 +34,18 @@
       background: #ffffffcc;
       color: #000;
       padding: 15px;
-      border-radius: 8px;
-      width: 220px;
+      border-radius: 12px;
+      width: 240px;
       text-align: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      font-size: 1.2em;
     }
 
     .animal img {
       width: 100%;
-      height: 160px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
     }
 
@@ -52,4 +53,178 @@
       display: block;
       margin-top: 10px;
       font-weight: bold;
-      fon
+    }
+
+    .animal-check {
+      transform: scale(2.5);
+      accent-color: green;
+      cursor: pointer;
+      margin-right: 14px;
+      vertical-align: middle;
+    }
+
+    #completion-popup,
+    #info-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    #completion-popup img,
+    #info-popup img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Bugtopia Hornsea Zoo - Free Roaming Animals</h1>
+
+    <p style="text-align: center; font-size: 1.4em; margin-bottom: 25px;">
+      ✅ Tick the boxes when you find the animal! - Click the images to find out more!
+    </p>
+
+    <div class="animal-list">
+      <div class="animal">
+        <img src="https://i.imgur.com/5Fxx9zi.jpg" alt="Blue Morpho" data-info="https://imgur.com/lrlHRAf.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/CwauHS4.jpg" alt="Green Iguana - Emerald" data-info="https://imgur.com/YcGWLaI.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Emerald"> Green Iguana - Emerald</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant - Donald" data-info="https://imgur.com/C2TRmET.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/UdYLG0y.jpg" alt="Green Iguana - Inferno" data-info="https://imgur.com/YcGWLaI.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Inferno"> Green Iguana - Inferno</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/LNA9gu3.jpg" alt="Blue and Gold Macaw - Jackie" data-info="https://imgur.com/zQ7szKg.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Blue and Gold Macaw - Jackie"> Blue and Gold Macaw - Jackie</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/yJMuVfB.jpg" alt="Green Winged Macaw - Nelly" data-info="https://imgur.com/YZQmmWc.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Green Winged Macaw - Nelly"> Green Winged Macaw - Nelly</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/ZF433w3.jpg" alt="Owl Butterfly" data-info="https://imgur.com/gSrC7Ut.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Owl Butterfly"> Owl Butterfly</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/EhNrm8B.jpg" alt="Chinese Soft Shell Turtle" data-info="https://imgur.com/93q0Xnj.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Chinese Soft Shell Turtle"> Chinese Soft Shell Turtle</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/v7vo7IV.jpg" alt="Red Footed Tortoise" data-info="https://imgur.com/Xvz1aW2.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise"> Red Footed Tortoise</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/iT8yLZh.jpg" alt="Golden Pheasant - Melania" data-info="https://imgur.com/C2TRmET.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant - Melania"> Golden Pheasant - Melania</label>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 2em; margin-top: 40px; font-weight: bold; color: darkgreen;">
+      Can you find them all?
+    </p>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bugtopia.co.uk" target="_blank">
+        <img src="https://i.imgur.com/tj0wqGL.png" alt="Bugtopia Logo" style="max-width: 150px;">
+      </a>
+    </div>
+  </div>
+
+  <!-- Completion Popup -->
+  <div id="completion-popup">
+    <img src="https://i.imgur.com/X08eo9y.png" alt="You found them all!">
+  </div>
+
+  <!-- Info Popup -->
+  <div id="info-popup">
+    <img id="info-image" src="" alt="Animal Info">
+  </div>
+
+  <script>
+    // Completion Logic
+    function checkAllBoxes() {
+      const checkboxes = document.querySelectorAll('.animal-check');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      const popup = document.getElementById('completion-popup');
+
+      if (allChecked && popup.style.display !== 'flex') {
+        popup.style.display = 'flex';
+        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+      }
+    }
+
+    function saveCheckboxState() {
+      const seen = [];
+      document.querySelectorAll('.animal-check').forEach(cb => {
+        if (cb.checked) seen.push(cb.dataset.animal);
+      });
+      localStorage.setItem('seenAnimals', JSON.stringify(seen));
+    }
+
+    window.addEventListener('load', () => {
+      const seen = JSON.parse(localStorage.getItem('seenAnimals') || '[]');
+      document.querySelectorAll('.animal-check').forEach(cb => {
+        if (seen.includes(cb.dataset.animal)) cb.checked = true;
+      });
+    });
+
+    document.querySelectorAll('.animal-check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        checkAllBoxes();
+        saveCheckboxState();
+      });
+    });
+
+    document.getElementById('completion-popup').addEventListener('click', () => {
+      document.getElementById('completion-popup').style.display = 'none';
+    });
+
+    // Info popup
+    document.querySelectorAll('.animal img').forEach(img => {
+      img.addEventListener('click', () => {
+        const infoSrc = img.getAttribute('data-info');
+        const infoPopup = document.getElementById('info-popup');
+        const infoImage = document.getElementById('info-image');
+        infoImage.src = infoSrc;
+        infoPopup.style.display = 'flex';
+      });
+    });
+
+    document.getElementById('info-popup').addEventListener('click', () => {
+      document.getElementById('info-popup').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
