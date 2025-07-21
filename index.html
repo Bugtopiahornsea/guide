@@ -69,6 +69,7 @@
       padding: 3px;
       border-radius: 5px;
       margin-top: 5px;
+      text-align: center;
     }
 
     #completion-popup,
@@ -106,6 +107,25 @@
     #reset-button:hover {
       background-color: #90ee90;
     }
+
+    /* Style for plus/minus buttons next to Vietnamese Stick Insect count */
+    .count-controls button {
+      font-size: 1.4em;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      margin: 0 5px;
+      vertical-align: middle;
+    }
+
+    .count-controls button:active {
+      background-color: #45a049;
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -132,15 +152,6 @@
       <div class="animal">
         <img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant - Donald" data-info="https://imgur.com/C2TRmET.jpg">
         <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
-        <div style="margin-top: 10px; font-size: 0.9em;">
-          How many did you find?<br>
-          <input type="number" id="vietnamese-count" min="0" max="50">
-        </div>
       </div>
 
       <div class="animal">
@@ -176,6 +187,17 @@
       <div class="animal">
         <img src="https://i.imgur.com/iT8yLZh.jpg" alt="Golden Pheasant - Melania" data-info="https://imgur.com/C2TRmET.jpg">
         <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant - Melania"> Golden Pheasant - Melania</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
+        <div class="count-controls" style="margin-top: 10px; font-size: 0.9em;">
+          How many have you found?<br>
+          <button type="button" onclick="changeCount(-1)">−</button>
+          <input type="number" id="vietnamese-count" min="0" max="50" step="1" value="0" />
+          <button type="button" onclick="changeCount(1)">+</button>
+        </div>
       </div>
     </div>
 
@@ -235,12 +257,22 @@
 
       document.querySelectorAll('.animal-check').forEach(cb => cb.checked = false);
       const vietnameseInput = document.getElementById('vietnamese-count');
-      if (vietnameseInput) vietnameseInput.value = '';
+      if (vietnameseInput) vietnameseInput.value = 0;
 
       localStorage.removeItem('seenAnimals');
       localStorage.removeItem('vietnameseCount');
 
       document.getElementById('completion-popup').style.display = 'none';
+    }
+
+    function changeCount(delta) {
+      const input = document.getElementById('vietnamese-count');
+      let value = parseInt(input.value || '0', 10);
+      value += delta;
+      if (value < 0) value = 0;
+      if (value > 50) value = 50;
+      input.value = value;
+      saveCheckboxState();
     }
 
     window.addEventListener('load', () => {
@@ -253,6 +285,8 @@
       const savedCount = localStorage.getItem('vietnameseCount');
       if (savedCount !== null && vietnameseInput) {
         vietnameseInput.value = savedCount;
+      } else if (vietnameseInput) {
+        vietnameseInput.value = 0;
       }
 
       if (vietnameseInput) {
