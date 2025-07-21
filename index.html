@@ -63,6 +63,14 @@
       vertical-align: middle;
     }
 
+    input[type="number"] {
+      width: 60px;
+      font-size: 1em;
+      padding: 3px;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
     #completion-popup,
     #info-popup {
       display: none;
@@ -113,6 +121,10 @@
       <div class="animal">
         <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
         <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
+        <div style="margin-top: 10px; font-size: 0.9em;">
+          How many did you find?<br>
+          <input type="number" id="vietnamese-count" min="0" max="50">
+        </div>
       </div>
 
       <div class="animal">
@@ -173,7 +185,6 @@
   </div>
 
   <script>
-    // Completion Logic
     function checkAllBoxes() {
       const checkboxes = document.querySelectorAll('.animal-check');
       const allChecked = Array.from(checkboxes).every(cb => cb.checked);
@@ -191,6 +202,11 @@
         if (cb.checked) seen.push(cb.dataset.animal);
       });
       localStorage.setItem('seenAnimals', JSON.stringify(seen));
+
+      const vietnameseInput = document.getElementById('vietnamese-count');
+      if (vietnameseInput) {
+        localStorage.setItem('vietnameseCount', vietnameseInput.value);
+      }
     }
 
     window.addEventListener('load', () => {
@@ -198,6 +214,16 @@
       document.querySelectorAll('.animal-check').forEach(cb => {
         if (seen.includes(cb.dataset.animal)) cb.checked = true;
       });
+
+      const vietnameseInput = document.getElementById('vietnamese-count');
+      const savedCount = localStorage.getItem('vietnameseCount');
+      if (savedCount !== null && vietnameseInput) {
+        vietnameseInput.value = savedCount;
+      }
+
+      if (vietnameseInput) {
+        vietnameseInput.addEventListener('input', saveCheckboxState);
+      }
     });
 
     document.querySelectorAll('.animal-check').forEach(cb => {
