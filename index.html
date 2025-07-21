@@ -103,6 +103,7 @@
     </p>
 
     <div class="animal-list">
+      <!-- Animal Blocks -->
       <div class="animal">
         <img src="https://i.imgur.com/5Fxx9zi.jpg" alt="Blue Morpho" data-info="https://imgur.com/lrlHRAf.jpg">
         <label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label>
@@ -115,16 +116,7 @@
 
       <div class="animal">
         <img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant - Donald" data-info="https://imgur.com/C2TRmET.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label>
-      </div>
-
-      <div class="animal">
-        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
-        <div style="margin-top: 10px; font-size: 0.9em;">
-          How many did you find?<br>
-          <input type="number" id="vietnamese-count" min="0" max="50">
-        </div>
+        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant - Donald"> Golden Pheasant - Donald</label>
       </div>
 
       <div class="animal">
@@ -155,6 +147,15 @@
       <div class="animal">
         <img src="https://i.imgur.com/v7vo7IV.jpg" alt="Red Footed Tortoise" data-info="https://imgur.com/Xvz1aW2.jpg">
         <label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise"> Red Footed Tortoise</label>
+      </div>
+
+         <div class="animal">
+        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
+        <div style="margin-top: 10px; font-size: 0.9em;">
+          How many did you find?<br>
+          <input type="number" id="vietnamese-count" min="0" max="50">
+        </div>
       </div>
 
       <div class="animal">
@@ -237,7 +238,6 @@
       document.getElementById('completion-popup').style.display = 'none';
     });
 
-    // Info popup
     document.querySelectorAll('.animal img').forEach(img => {
       img.addEventListener('click', () => {
         const infoSrc = img.getAttribute('data-info');
