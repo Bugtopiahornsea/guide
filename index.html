@@ -91,6 +91,21 @@
       max-width: 90%;
       max-height: 90%;
     }
+
+    #reset-button {
+      background-color: lightgreen;
+      color: black;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    #reset-button:hover {
+      background-color: #90ee90;
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -103,7 +118,7 @@
     </p>
 
     <div class="animal-list">
-      <!-- Animal Blocks -->
+      <!-- Animal blocks here (all your existing ones) -->
       <div class="animal">
         <img src="https://i.imgur.com/5Fxx9zi.jpg" alt="Blue Morpho" data-info="https://imgur.com/lrlHRAf.jpg">
         <label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label>
@@ -116,7 +131,16 @@
 
       <div class="animal">
         <img src="https://i.imgur.com/vkeVbiJ.jpg" alt="Golden Pheasant - Donald" data-info="https://imgur.com/C2TRmET.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant - Donald"> Golden Pheasant - Donald</label>
+        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant"> Golden Pheasant</label>
+      </div>
+
+      <div class="animal">
+        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
+        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
+        <div style="margin-top: 10px; font-size: 0.9em;">
+          How many did you find?<br>
+          <input type="number" id="vietnamese-count" min="0" max="50">
+        </div>
       </div>
 
       <div class="animal">
@@ -149,19 +173,15 @@
         <label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise"> Red Footed Tortoise</label>
       </div>
 
-         <div class="animal">
-        <img src="https://i.imgur.com/LhU0r60.jpg" alt="Vietnamese Stick Insect" data-info="https://imgur.com/KERv7gF.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
-        <div style="margin-top: 10px; font-size: 0.9em;">
-          How many did you find?<br>
-          <input type="number" id="vietnamese-count" min="0" max="50">
-        </div>
-      </div>
-
       <div class="animal">
         <img src="https://i.imgur.com/iT8yLZh.jpg" alt="Golden Pheasant - Melania" data-info="https://imgur.com/C2TRmET.jpg">
         <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant - Melania"> Golden Pheasant - Melania</label>
       </div>
+    </div>
+
+    <!-- Reset Button -->
+    <div style="text-align: center;">
+      <button id="reset-button" onclick="resetChecklist()">Reset Checklist</button>
     </div>
 
     <p style="text-align: center; font-size: 2em; margin-top: 40px; font-weight: bold; color: darkgreen;">
@@ -210,6 +230,19 @@
       }
     }
 
+    function resetChecklist() {
+      if (!confirm('Are you sure you want to reset your checklist?')) return;
+
+      document.querySelectorAll('.animal-check').forEach(cb => cb.checked = false);
+      const vietnameseInput = document.getElementById('vietnamese-count');
+      if (vietnameseInput) vietnameseInput.value = '';
+
+      localStorage.removeItem('seenAnimals');
+      localStorage.removeItem('vietnameseCount');
+
+      document.getElementById('completion-popup').style.display = 'none';
+    }
+
     window.addEventListener('load', () => {
       const seen = JSON.parse(localStorage.getItem('seenAnimals') || '[]');
       document.querySelectorAll('.animal-check').forEach(cb => {
@@ -238,6 +271,7 @@
       document.getElementById('completion-popup').style.display = 'none';
     });
 
+    // Info popup
     document.querySelectorAll('.animal img').forEach(img => {
       img.addEventListener('click', () => {
         const infoSrc = img.getAttribute('data-info');
