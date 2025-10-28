@@ -95,12 +95,15 @@
       align-items: center;
       flex-direction: column;
       cursor: pointer;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     #completion-popup img,
     #info-popup img {
       max-width: 90%;
-      max-height: 90%;
+      max-height: 80%;
+      border-radius: 8px;
     }
 
     #reset-button {
@@ -135,6 +138,21 @@
 
     .count-controls button:active {
       background-color: #45a049;
+    }
+
+    /* Back button in info popup */
+    #back-button {
+      margin-top: 16px;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      background-color: lightgreen;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #back-button:hover {
+      background-color: #90ee90;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -245,6 +263,7 @@
   <!-- Info Popup -->
   <div id="info-popup">
     <img id="info-image" src="" alt="Animal Info">
+    <button id="back-button" onclick="closeInfoPopup()">Back</button>
   </div>
 
   <script>
@@ -295,6 +314,10 @@
       saveCheckboxState();
     }
 
+    function closeInfoPopup() {
+      document.getElementById('info-popup').style.display = 'none';
+    }
+
     window.addEventListener('load', () => {
       const seen = JSON.parse(localStorage.getItem('seenAnimals') || '[]');
       document.querySelectorAll('.animal-check').forEach(cb => {
@@ -325,7 +348,7 @@
       document.getElementById('completion-popup').style.display = 'none';
     });
 
-    // Info popup
+    // Info popup: open on image click
     document.querySelectorAll('.animal img').forEach(img => {
       img.addEventListener('click', () => {
         const infoSrc = img.getAttribute('data-info');
@@ -336,18 +359,12 @@
       });
     });
 
-    document.getElementById('info-popup').addEventListener('click', () => {
-      document.getElementById('info-popup').style.display = 'none';
+    // Also allow clicking anywhere on overlay to close (kept for convenience)
+    document.getElementById('info-popup').addEventListener('click', (e) => {
+      // prevent closing when clicking the image or the back button container
+      const isInner = e.target.id === 'info-image' || e.target.id === 'back-button';
+      if (!isInner) closeInfoPopup();
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
