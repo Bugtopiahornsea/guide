@@ -154,6 +154,50 @@
     #back-button:hover {
       background-color: #90ee90;
     }
+
+    /* Warning modal styles */
+    #warning-modal {
+      display: flex;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #warning-modal .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    #warning-modal img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    #understandBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #understandBtn:hover {
+      background-color: #0056b3;
+    }
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -266,6 +310,14 @@
     <button id="back-button" onclick="closeInfoPopup()">Back</button>
   </div>
 
+  <!-- Warning Modal -->
+  <div id="warning-modal">
+    <div class="modal-content">
+      <img src="safetypop.png" alt="Warning Image">
+      <button id="understandBtn">I Understand</button>
+    </div>
+  </div>
+
   <script>
     function checkAllBoxes() {
       const checkboxes = document.querySelectorAll('.animal-check');
@@ -335,6 +387,15 @@
       if (vietnameseInput) {
         vietnameseInput.addEventListener('input', saveCheckboxState);
       }
+
+      // Show warning modal on every visit
+      const warningModal = document.getElementById('warning-modal');
+      const understandBtn = document.getElementById('understandBtn');
+      warningModal.style.display = 'flex';
+
+      understandBtn.addEventListener('click', () => {
+        warningModal.style.display = 'none';
+      });
     });
 
     document.querySelectorAll('.animal-check').forEach(cb => {
@@ -359,9 +420,7 @@
       });
     });
 
-    // Also allow clicking anywhere on overlay to close (kept for convenience)
     document.getElementById('info-popup').addEventListener('click', (e) => {
-      // prevent closing when clicking the image or the back button container
       const isInner = e.target.id === 'info-image' || e.target.id === 'back-button';
       if (!isInner) closeInfoPopup();
     });
