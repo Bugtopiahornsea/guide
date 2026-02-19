@@ -205,6 +205,32 @@
       background-color: #0056b3;
     }
 
+    .enclosure-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+max-width:1100px;
+margin:30px auto;
+}
+
+.enclosure-grid img{
+width:100%;
+border-radius:10px;
+cursor:pointer;
+transition:.2s;
+}
+
+.enclosure-grid img:hover{
+transform:scale(1.05);
+}
+
+@media(max-width:900px){
+.enclosure-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -299,6 +325,54 @@
     <p style="text-align: center; font-size: 2em; margin-top: 40px; font-weight: bold; color: darkgreen;">
       Can you find them all?
     </p>
+
+    <!-- ENCLOSURES SECTION -->
+
+<div style="text-align:center; margin-top:50px;">
+  <img src="enc/encl.png" style="max-width:500px;width:85%;">
+</div>
+
+<div class="enclosure-grid">
+  <img src="enc/kaisers newt.jpg" class="enclosure-img">
+  <img src="enc/corn.jpg" class="enclosure-img">
+  <img src="enc/RATSNAKE.jpg" class="enclosure-img">
+  <img src="enc/treeFROGS.jpg" class="enclosure-img">
+  <img src="enc/VINEGAROON.jpg" class="enclosure-img">
+  <img src="enc/Royal Python.jpg" class="enclosure-img">
+  <img src="enc/CANE TOAD.jpg" class="enclosure-img">
+  <img src="enc/BLACK BEAUT.jpg" class="enclosure-img">
+  <img src="enc/SUN BEETLE.jpg" class="enclosure-img">
+  <img src="enc/red leg.jpg" class="enclosure-img">
+  <img src="enc/CHILE".jpg" class="enclosure-img">
+  <img src="enc/millipede.jpg" class="enclosure-img">
+  <img src="enc/MEDIT CENTIPEDE.jpg" class="enclosure-img">
+  <img src="enc/Pepperd roach.jpg" class="enclosure-img">
+  <img src="enc/CIVET.jpg" class="enclosure-img">
+  <img src="enc/boa.jpg" class="enclosure-img">
+  <img src="enc/day.jpg" class="enclosure-img">
+  <img src="enc/PINKTOE2.jpg" class="enclosure-img">
+  <img src="enc/SALMON PINK J.jpg" class="enclosure-img">
+  <img src="enc/YELLOW BELLIED SLIDER.jpg" class="enclosure-img">
+  <img src="enc/FOREST scorpion.jpg" class="enclosure-img">
+  <img src="enc/NORTHERN MAP TURTLE.jpg" class="enclosure-img">
+  <img src="enc/ridgetail.jpg" class="enclosure-img">
+</div>
+
+     <div id="enclosure-popup" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+background:rgba(0,0,0,0.9);
+z-index:9999;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+">
+  <img id="enclosure-large" style="max-width:95%;max-height:90%;border-radius:10px;">
+</div>
 
     <div style="text-align: center; margin-top: 20px;">
       <a href="https://www.bugtopia.co.uk" target="_blank">
@@ -438,9 +512,23 @@
       const isInner = e.target.id === 'info-image' || e.target.id === 'back-button';
       if (!isInner) closeInfoPopup();
     });
+
+    // Enclosure image popup
+document.querySelectorAll('.enclosure-img').forEach(img=>{
+  img.addEventListener('click',()=>{
+    document.getElementById('enclosure-large').src=img.src;
+    document.getElementById('enclosure-popup').style.display='flex';
+  });
+});
+
+document.getElementById('enclosure-popup').addEventListener('click',()=>{
+  document.getElementById('enclosure-popup').style.display='none';
+});
   </script>
+
 </body>
 </html>
+
 
 
 
