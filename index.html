@@ -343,7 +343,7 @@ grid-template-columns:repeat(2,1fr);
   <img src="enc/BLACK BEAUT.jpg" class="enclosure-img">
   <img src="enc/SUN BEETLE.jpg" class="enclosure-img">
   <img src="enc/red leg.jpg" class="enclosure-img">
-  <img src="enc/CHILE".jpg" class="enclosure-img">
+  <img src="enc/CHILE2".jpg" class="enclosure-img">
   <img src="enc/millipede.jpg" class="enclosure-img">
   <img src="enc/MEDIT CENTIPEDE.jpg" class="enclosure-img">
   <img src="enc/Pepperd roach.jpg" class="enclosure-img">
@@ -358,7 +358,8 @@ grid-template-columns:repeat(2,1fr);
   <img src="enc/ridgetail.jpg" class="enclosure-img">
 </div>
 
-     <div id="enclosure-popup" style="
+   <!-- Enclosure popup overlay -->
+<div id="enclosure-popup" style="
 display:none;
 position:fixed;
 top:0;
@@ -370,9 +371,21 @@ z-index:9999;
 justify-content:center;
 align-items:center;
 cursor:pointer;
+flex-direction: column;
 ">
   <img id="enclosure-large" style="max-width:95%;max-height:90%;border-radius:10px;">
+  <button id="enclosure-back" style="
+      margin-top:20px;
+      padding:10px 20px;
+      font-size:1.2em;
+      border:none;
+      border-radius:6px;
+      background-color:#007bff;
+      color:white;
+      cursor:pointer;
+    ">Back</button>
 </div>
+
 
     <div style="text-align: center; margin-top: 20px;">
       <a href="https://www.bugtopia.co.uk" target="_blank">
@@ -513,21 +526,32 @@ cursor:pointer;
       if (!isInner) closeInfoPopup();
     });
 
-    // Enclosure image popup
-document.querySelectorAll('.enclosure-img').forEach(img=>{
-  img.addEventListener('click',()=>{
-    document.getElementById('enclosure-large').src=img.src;
-    document.getElementById('enclosure-popup').style.display='flex';
+  // Enclosure image popup
+document.querySelectorAll('.enclosure-img').forEach(img => {
+  img.addEventListener('click', () => {
+    document.getElementById('enclosure-large').src = img.src;
+    document.getElementById('enclosure-popup').style.display = 'flex';
   });
 });
 
-document.getElementById('enclosure-popup').addEventListener('click',()=>{
-  document.getElementById('enclosure-popup').style.display='none';
+// Close popup when clicking anywhere except the image or button
+const enclosurePopup = document.getElementById('enclosure-popup');
+enclosurePopup.addEventListener('click', (e) => {
+  if (e.target.id !== 'enclosure-large' && e.target.id !== 'enclosure-back') {
+    enclosurePopup.style.display = 'none';
+  }
 });
+
+// Back button closes popup
+document.getElementById('enclosure-back').addEventListener('click', () => {
+  enclosurePopup.style.display = 'none';
+});
+
   </script>
 
 </body>
 </html>
+
 
 
 
