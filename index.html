@@ -7,82 +7,78 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-BC0FZ397XB');
 </script>
   
-  <meta charset="UTF-8" />
-  <title>Bugtopia Hornsea Zoo - Free Roaming Animals</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('Background.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-    }
+<meta charset="UTF-8" />
+<title>Bugtopia Hornsea Zoo - Free Roaming Animals</title>
 
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.7);
-      min-height: 100vh;
-      padding: 20px;
-    }
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:url('Background.png') no-repeat center center fixed;
+  background-size:cover;
+  color:#fff;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+.overlay{
+  background-color:rgba(0,0,0,0.7);
+  min-height:100vh;
+  padding:20px;
+}
 
-    .animal-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
+.animal-list{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
 
-    .animal {
-      background: #ffffffcc;
-      color: #000;
-      padding: 15px;
-      border-radius: 12px;
-      width: 240px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      font-size: 1.2em;
-    }
+.animal{
+  background:#ffffffcc;
+  color:#000;
+  padding:15px;
+  border-radius:12px;
+  width:240px;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4);
+  font-size:1.2em;
+}
 
-    .animal img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+.animal img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:8px;
+  cursor:pointer;
+}
 
-    .animal label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+.animal label{
+  display:block;
+  margin-top:10px;
+  font-weight:bold;
+}
 
-    .animal-check {
-      transform: scale(2.5);
-      accent-color: green;
-      cursor: pointer;
-      margin-right: 14px;
-      vertical-align: middle;
-    }
+.animal-check{
+  transform:scale(2.5);
+  accent-color:green;
+  cursor:pointer;
+  margin-right:14px;
+  vertical-align:middle;
+}
 
-    input[type="number"] {
-      width: 60px;
-      font-size: 1em;
-      padding: 3px;
-      border-radius: 5px;
-      margin-top: 5px;
-      text-align: center;
-    }
+input[type="number"]{
+  width:60px;
+  font-size:1em;
+  padding:3px;
+  border-radius:5px;
+  margin-top:5px;
+  text-align:center;
+}
 
-    body::after {
+/* Bottom fade gradient */
+body::after{
   content:"";
   position:fixed;
   bottom:0;
@@ -93,552 +89,115 @@
   pointer-events:none;
   z-index:5;
 }
-    
-    #completion-popup,
-    #info-popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      cursor: pointer;
-      padding: 20px;
-      box-sizing: border-box;
-    }
 
-    #completion-popup img,
-    #info-popup img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 8px;
-    }
-
-    #reset-button {
-      background-color: lightgreen;
-      color: black;
-      font-size: 1.2em;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 30px;
-    }
-
-    #reset-button:hover {
-      background-color: #90ee90;
-    }
+/* ===================== */
+/* SCROLL HINT */
+/* ===================== */
 
 .scroll-hint{
   position:fixed;
-  bottom:20px;
+  bottom:22px;
   left:50%;
   transform:translateX(-50%);
-  font-size:36px;              /* Bigger by default */
-  color:rgba(255,255,255,0.9); /* More visible */
-  animation: float 1.8s ease-in-out infinite;
-  pointer-events:none;
-  user-select:none;
-  z-index:10;                  /* Make sure it stays above gradient */
-  
+  z-index:10;
   opacity:1;
   transition:opacity 0.4s ease;
+  pointer-events:none;
+  user-select:none;
 }
 
 .scroll-hint.hide{
   opacity:0;
 }
+
+.scroll-hint span{
+  display:inline-block;
+  font-size:42px;
+  color:rgba(255,255,255,0.95);
+  text-shadow:0 0 10px rgba(255,255,255,0.6);
+  animation:float 2s ease-in-out infinite;
+}
+
+@media(max-width:768px){
+  .scroll-hint span{
+    font-size:56px;
+  }
 }
 
 @keyframes float{
-  0%,100%{ transform:translate(-50%,0); }
-  50%{ transform:translate(-50%,10px); }
-}
-    /* Style for plus/minus buttons next to Vietnamese Stick Insect count */
-    .count-controls button {
-      font-size: 1.4em;
-      width: 32px;
-      height: 32px;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      user-select: none;
-      margin: 0 5px;
-      vertical-align: middle;
-    }
-
-    .count-controls button:active {
-      background-color: #45a049;
-    }
-
-    /* Back button in info popup */
-    #back-button {
-      margin-top: 16px;
-      padding: 10px 20px;
-      font-size: 1.1em;
-      background-color: lightgreen;
-      color: black;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #back-button:hover {
-      background-color: #90ee90;
-    }
-
-    /* Warning modal styles */
-    #warning-modal {
-      display: flex;
-      position: fixed;
-      z-index: 10000;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-    }
-
-    #warning-modal .modal-content {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 90%;        /* increase max width */
-  width: 90vw;            /* nearly full viewport width */
-  max-height: 90vh;       /* fit inside viewport height */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(12px); }
 }
 
-#warning-modal img {
-  width: 100%;           /* take full width of modal */
-  height: auto;          /* maintain aspect ratio */
-  max-height: 80vh;      /* never exceed screen height */
-  border-radius: 8px;
+/* Popups */
+#completion-popup,
+#info-popup{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  background:rgba(0,0,0,0.8);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  cursor:pointer;
+  padding:20px;
+  box-sizing:border-box;
 }
 
-    #understandBtn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    #understandBtn:hover {
-      background-color: #0056b3;
-    }
-
-    .enclosure-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:18px;
-max-width:1100px;
-margin:30px auto;
+#completion-popup img,
+#info-popup img{
+  max-width:90%;
+  max-height:80%;
+  border-radius:8px;
 }
 
-.enclosure-grid img{
-width:100%;
-border-radius:10px;
-cursor:pointer;
-transition:.2s;
-}
+</style>
 
-.enclosure-grid img:hover{
-transform:scale(1.05);
-}
-
-@media(max-width:900px){
-.enclosure-grid{
-grid-template-columns:repeat(2,1fr);
-}
-}
-
-
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
-  <div class="overlay">
-  <img src="enc/free roam.png" style="max-width:700px;width:90%;display:block;margin:0 auto 30px;">
 
+<div class="overlay">
 
-    <p style="text-align: center; font-size: 1.4em; margin-bottom: 25px;">
-      ✅ Tick the boxes when you find the animal! - Click the images to find out more!
-    </p>
+<p style="text-align:center;font-size:2em;margin-top:40px;font-weight:bold;color:darkgreen;">
+Can you find them all?
+</p>
 
-    <div class="animal-list">
-      <!-- Animal blocks here (all your existing ones) -->
-      <div class="animal">
-        <img src="Bluemorph.jpg" alt="Blue Morpho" data-info="info morph.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Blue Morpho"> Blue Morpho</label>
-      </div>
+<!-- SCROLL HINT -->
+<div class="scroll-hint"><span>⌄</span></div>
 
-      <div class="animal">
-        <img src="emerald.jpg" alt="Green Iguana - Emerald" data-info="info iguana.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Emerald"> Green Iguana - Emerald</label>
-      </div>
-
-      <div class="animal">
-        <img src="donald.jpg" alt="Golden Pheasant - Donald" data-info="info pheas.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant - Donald"> Golden Pheasant - Donald</label>
-      </div>
-
-      <div class="animal">
-        <img src="inferno.jpg" alt="Green Iguana - Inferno" data-info="info iguana.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Green Iguana - Inferno"> Green Iguana - Inferno</label>
-      </div>
-
-      <div class="animal">
-        <img src="jack.jpg" alt="Blue and Gold Macaw - Jackie" data-info="info B&G.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Blue and Gold Macaw - Jackie"> Blue and Gold Macaw - Jackie</label>
-      </div>
-
-      <div class="animal">
-        <img src="nelly.jpg" alt="Green Winged Macaw - Nelly" data-info="info GW.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Green Winged Macaw - Nelly"> Green Winged Macaw - Nelly</label>
-      </div>
-
-      <div class="animal">
-        <img src="owl.jpg" alt="Owl Butterfly" data-info="info owl.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Owl Butterfly"> Owl Butterfly</label>
-      </div>
-
-      <div class="animal">
-        <img src="soft.jpg" alt="Chinese Soft Shell Turtle - Pauline" data-info="info soft.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Chinese Soft Shell Turtle - Pauline"> Chinese Soft Shell Turtle - Pauline</label>
-      </div>
-
-      <div class="animal">
-        <img src="tort.jpg" alt="Red Footed Tortoise - Esio & Trot" data-info="info tort.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Red Footed Tortoise - Esio & Trot"> Red Footed Tortoise  - Esio & Trot</label>
-      </div>
-
-      <div class="animal">
-        <img src="mil.jpg" alt="Golden Pheasant - Melania" data-info="info pheas.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Golden Pheasant - Melania"> Golden Pheasant - Melania</label>
-      </div>
-
-      <div class="animal">
-        <img src="Budgerigar.jpg" alt="Budgerigars" data-info="info Budgies.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Budgerigars"> Budgerigars</label>
-      </div>
-
-       <div class="animal">
-        <img src="pharaohant.jpg" alt="Pharaoh Ant" data-info="Pharaoh.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Pharaoh Ant"> Pharaoh Ant</label>
-      </div>
-
-      <div class="animal">
-        <img src="stick.jpg" alt="Vietnamese Stick Insect" data-info="info stick.jpg">
-        <label><input type="checkbox" class="animal-check" data-animal="Vietnamese Stick Insect"> Vietnamese Stick Insect</label>
-        <div class="count-controls" style="margin-top: 10px; font-size: 0.9em;">
-          How many have you found?<br>
-          <button type="button" onclick="changeCount(-1)">−</button>
-          <input type="number" id="vietnamese-count" min="0" max="50" step="1" value="0" />
-          <button type="button" onclick="changeCount(1)">+</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Reset Button -->
-    <div style="text-align: center;">
-      <button id="reset-button" onclick="resetChecklist()">Reset Checklist</button>
-    </div>
-
-    <p style="text-align: center; font-size: 2em; margin-top: 40px; font-weight: bold; color: darkgreen;">
-      Can you find them all?
-    </p>
-
-    <div class="scroll-hint">⌄</div>
-
-    <!-- ENCLOSURES SECTION -->
-
-<div style="text-align:center; margin-top:50px;">
-  <img src="enc/encl.png" style="max-width:500px;width:85%;">
 </div>
 
-<div class="enclosure-grid">
-  <img src="enc/kaisers newt.jpg" class="enclosure-img">
-  <img src="enc/corn.jpg" class="enclosure-img">
-  <img src="enc/RATSNAKE.jpg" class="enclosure-img">
-  <img src="enc/treeFROGS.jpg" class="enclosure-img">
-  <img src="enc/VINEGAROON.jpg" class="enclosure-img">
-  <img src="enc/Royal Python.jpg" class="enclosure-img">
-  <img src="enc/CANE TOAD.jpg" class="enclosure-img">
-  <img src="enc/BLACK BEAUT.jpg" class="enclosure-img">
-  <img src="enc/SUN BEETLE.jpg" class="enclosure-img">
-  <img src="enc/red leg.jpg" class="enclosure-img">
-  <img src="enc/CHILE2.jpg" class="enclosure-img">
-  <img src="enc/millipede.jpg" class="enclosure-img">
-  <img src="enc/MEDIT CENTIPEDE.jpg" class="enclosure-img">
-  <img src="enc/Pepperd roach.jpg" class="enclosure-img">
-  <img src="enc/CIVET.jpg" class="enclosure-img">
-  <img src="enc/boa.jpg" class="enclosure-img">
-  <img src="enc/day.jpg" class="enclosure-img">
-  <img src="enc/PINKTOE2.jpg" class="enclosure-img">
-  <img src="enc/SALMON PINK J.jpg" class="enclosure-img">
-  <img src="enc/YELLOW BELLIED SLIDER.jpg" class="enclosure-img">
-  <img src="enc/FOREST scorpion.jpg" class="enclosure-img">
-  <img src="enc/NORTHERN MAP TURTLE.jpg" class="enclosure-img">
-  <img src="enc/ridgetail.jpg" class="enclosure-img">
+<!-- Completion Popup -->
+<div id="completion-popup">
+  <img src="congrat.png" alt="You found them all!">
 </div>
 
-   <!-- Enclosure popup overlay -->
-<div id="enclosure-popup" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100vw;
-height:100vh;
-background:rgba(0,0,0,0.9);
-z-index:9999;
-justify-content:center;
-align-items:center;
-cursor:pointer;
-flex-direction: column;
-">
-  <img id="enclosure-large" style="max-width:95%;max-height:90%;border-radius:10px;">
-  <button id="enclosure-back" style="
-      margin-top:20px;
-      padding:10px 20px;
-      font-size:1.2em;
-      border:none;
-      border-radius:6px;
-      background-color:#007bff;
-      color:white;
-      cursor:pointer;
-    ">Back</button>
-</div>
+<script>
 
-    <!-- Explorers Lodge Section -->
-<div style="text-align:center; margin-top:50px;">
-  <img src="enc/lodge.png" style="max-width:500px;width:85%; display:block; margin:0 auto;">
-  <p style="text-align:center; font-size:1.2em; margin-top:10px; color:white;">
-    Only accessible during certain encounters.... or if you ask a Keeper nicely!
-  </p>
-</div>
+/* Scroll hide at bottom */
+const scrollHint=document.querySelector('.scroll-hint');
 
-<div class="enclosure-grid">
-  <img src="enc/SALMON PINK J.jpg" class="enclosure-img">
-  <img src="enc/ROSEHAIR.jpg" class="enclosure-img">
-  <img src="enc/Williamsi.jpg" class="enclosure-img">
-  <img src="enc/CRESTED.jpg" class="enclosure-img">
-  <img src="enc/SKINK.jpg" class="enclosure-img">
-  <img src="enc/bearded dragon.jpg" class="enclosure-img">
-</div>
+function checkScrollPosition(){
+  const scrollTop=window.scrollY;
+  const windowHeight=window.innerHeight;
+  const documentHeight=document.documentElement.scrollHeight;
 
-
-
-    <div style="text-align: center; margin-top: 20px;">
-      <a href="https://www.bugtopia.co.uk" target="_blank">
-        <img src="logo.jpg" alt="Bugtopia Logo" style="max-width: 150px;">
-      </a>
-    </div>
-  </div>
-
- 
-<!-- Static Image on Page -->
-<div style="text-align: center; margin-top: 20px;">
-  <img src="safetypop.png" alt="Safety Image" style="width: 100%; max-width: 1200px; height: auto; border-radius: 8px;">
-</div>
-  
-  <!-- Completion Popup -->
-  <div id="completion-popup">
-    <img src="congrat.png" alt="You found them all!">
-  </div>
-
-  <!-- Info Popup -->
-  <div id="info-popup">
-    <img id="info-image" src="" alt="Animal Info">
-    <button id="back-button" onclick="closeInfoPopup()">Back</button>
-  </div>
-
-  <!-- Warning Modal -->
-  <div id="warning-modal">
-    <div class="modal-content">
-      <img src="safetypop.png" alt="Warning Image">
-      <button id="understandBtn">I Understand</button>
-    </div>
-  </div>
-
-  <script>
-    function checkAllBoxes() {
-      const checkboxes = document.querySelectorAll('.animal-check');
-      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-      const popup = document.getElementById('completion-popup');
-
-      if (allChecked && popup.style.display !== 'flex') {
-        popup.style.display = 'flex';
-        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
-      }
-    }
-
-    function saveCheckboxState() {
-      const seen = [];
-      document.querySelectorAll('.animal-check').forEach(cb => {
-        if (cb.checked) seen.push(cb.dataset.animal);
-      });
-      localStorage.setItem('seenAnimals', JSON.stringify(seen));
-
-      const vietnameseInput = document.getElementById('vietnamese-count');
-      if (vietnameseInput) {
-        localStorage.setItem('vietnameseCount', vietnameseInput.value);
-      }
-    }
-
-    function resetChecklist() {
-      if (!confirm('Are you sure you want to reset your checklist?')) return;
-
-      document.querySelectorAll('.animal-check').forEach(cb => cb.checked = false);
-      const vietnameseInput = document.getElementById('vietnamese-count');
-      if (vietnameseInput) vietnameseInput.value = 0;
-
-      localStorage.removeItem('seenAnimals');
-      localStorage.removeItem('vietnameseCount');
-
-      document.getElementById('completion-popup').style.display = 'none';
-    }
-
-    function changeCount(delta) {
-      const input = document.getElementById('vietnamese-count');
-      let value = parseInt(input.value || '0', 10);
-      value += delta;
-      if (value < 0) value = 0;
-      if (value > 50) value = 50;
-      input.value = value;
-      saveCheckboxState();
-    }
-
-    function closeInfoPopup() {
-      document.getElementById('info-popup').style.display = 'none';
-    }
-
-    window.addEventListener('load', () => {
-      const seen = JSON.parse(localStorage.getItem('seenAnimals') || '[]');
-      document.querySelectorAll('.animal-check').forEach(cb => {
-        if (seen.includes(cb.dataset.animal)) cb.checked = true;
-      });
-
-      const vietnameseInput = document.getElementById('vietnamese-count');
-      const savedCount = localStorage.getItem('vietnameseCount');
-      if (savedCount !== null && vietnameseInput) {
-        vietnameseInput.value = savedCount;
-      } else if (vietnameseInput) {
-        vietnameseInput.value = 0;
-      }
-
-      if (vietnameseInput) {
-        vietnameseInput.addEventListener('input', saveCheckboxState);
-      }
-
-      // Show warning modal on every visit
-      const warningModal = document.getElementById('warning-modal');
-      const understandBtn = document.getElementById('understandBtn');
-      warningModal.style.display = 'flex';
-
-      understandBtn.addEventListener('click', () => {
-        warningModal.style.display = 'none';
-      });
-    });
-
-    document.querySelectorAll('.animal-check').forEach(cb => {
-      cb.addEventListener('change', () => {
-        checkAllBoxes();
-        saveCheckboxState();
-      });
-    });
-
-    document.getElementById('completion-popup').addEventListener('click', () => {
-      document.getElementById('completion-popup').style.display = 'none';
-    });
-
-    // Info popup: open on image click
-    document.querySelectorAll('.animal img').forEach(img => {
-      img.addEventListener('click', () => {
-        const infoSrc = img.getAttribute('data-info');
-        const infoPopup = document.getElementById('info-popup');
-        const infoImage = document.getElementById('info-image');
-        infoImage.src = infoSrc;
-        infoPopup.style.display = 'flex';
-      });
-    });
-
-    document.getElementById('info-popup').addEventListener('click', (e) => {
-      const isInner = e.target.id === 'info-image' || e.target.id === 'back-button';
-      if (!isInner) closeInfoPopup();
-    });
-
-  // Enclosure image popup
-document.querySelectorAll('.enclosure-img').forEach(img => {
-  img.addEventListener('click', () => {
-    document.getElementById('enclosure-large').src = img.src;
-    document.getElementById('enclosure-popup').style.display = 'flex';
-  });
-});
-
-// Close popup when clicking anywhere except the image or button
-const enclosurePopup = document.getElementById('enclosure-popup');
-enclosurePopup.addEventListener('click', (e) => {
-  if (e.target.id !== 'enclosure-large' && e.target.id !== 'enclosure-back') {
-    enclosurePopup.style.display = 'none';
-  }
-});
-
-// Back button closes popup
-document.getElementById('enclosure-back').addEventListener('click', () => {
-  enclosurePopup.style.display = 'none';
-});
-
-    const scrollHint = document.querySelector('.scroll-hint');
-
-function checkScrollPosition() {
-  const scrollTop = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-
-  // If user is at bottom (with small buffer)
-  if (scrollTop + windowHeight >= documentHeight - 10) {
+  if(scrollTop+windowHeight>=documentHeight-10){
     scrollHint.classList.add('hide');
-  } else {
+  }else{
     scrollHint.classList.remove('hide');
   }
 }
 
-window.addEventListener('scroll', checkScrollPosition);
+window.addEventListener('scroll',checkScrollPosition);
 
-  </script>
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
