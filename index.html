@@ -133,25 +133,24 @@
       background-color: #90ee90;
     }
 
-    .scroll-hint{
+.scroll-hint{
   position:fixed;
-  bottom:10px;
+  bottom:14px;
   left:50%;
   transform:translateX(-50%);
-  width:6px;
-  height:6px;
-  background:white;
+  width:14px;
+  height:14px;
   border-radius:50%;
-  opacity:0.35;
-  animation: float 2.5s ease-in-out infinite;
+  border:2px solid rgba(255,255,255,0.7);
+  opacity:0.75;
+  animation: float 1.8s ease-in-out infinite;
   pointer-events:none;
 }
 
 @keyframes float{
   0%,100%{ transform:translate(-50%,0); }
-  50%{ transform:translate(-50%,6px); }
-}
-    
+  50%{ transform:translate(-50%,10px); }
+} 
     /* Style for plus/minus buttons next to Vietnamese Stick Insect count */
     .count-controls button {
       font-size: 1.4em;
@@ -602,6 +601,7 @@ document.getElementById('enclosure-back').addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
