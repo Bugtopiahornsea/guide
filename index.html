@@ -135,22 +135,20 @@
 
 .scroll-hint{
   position:fixed;
-  bottom:14px;
+  bottom:16px;
   left:50%;
   transform:translateX(-50%);
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,0.7);
-  opacity:0.75;
+  font-size:22px;
+  color:rgba(255,255,255,0.75);
   animation: float 1.8s ease-in-out infinite;
   pointer-events:none;
+  user-select:none;
 }
 
 @keyframes float{
   0%,100%{ transform:translate(-50%,0); }
   50%{ transform:translate(-50%,10px); }
-} 
+}
     /* Style for plus/minus buttons next to Vietnamese Stick Insect count */
     .count-controls button {
       font-size: 1.4em;
@@ -356,7 +354,7 @@ grid-template-columns:repeat(2,1fr);
       Can you find them all?
     </p>
 
-    <div class="scroll-hint"></div>
+    <div class="scroll-hint">⮟</div>
 
     <!-- ENCLOSURES SECTION -->
 
@@ -601,6 +599,7 @@ document.getElementById('enclosure-back').addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
