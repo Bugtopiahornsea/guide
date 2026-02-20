@@ -144,6 +144,14 @@
   pointer-events:none;
   user-select:none;
   z-index:10;                  /* Make sure it stays above gradient */
+  
+  opacity:1;
+  transition:opacity 0.4s ease;
+}
+
+.scroll-hint.hide{
+  opacity:0;
+}
 }
 
 @keyframes float{
@@ -596,10 +604,28 @@ document.getElementById('enclosure-back').addEventListener('click', () => {
   enclosurePopup.style.display = 'none';
 });
 
+    const scrollHint = document.querySelector('.scroll-hint');
+
+function checkScrollPosition() {
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  // If user is at bottom (with small buffer)
+  if (scrollTop + windowHeight >= documentHeight - 10) {
+    scrollHint.classList.add('hide');
+  } else {
+    scrollHint.classList.remove('hide');
+  }
+}
+
+window.addEventListener('scroll', checkScrollPosition);
+
   </script>
 
 </body>
 </html>
+
 
 
 
